@@ -1,4 +1,4 @@
-package org.atar.supportsys.broker;
+package org.atar.supportsys.publisher;
 
 
 import com.google.gson.Gson;

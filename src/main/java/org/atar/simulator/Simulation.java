@@ -2,17 +2,23 @@ package org.atar.simulator;
 
 import org.atar.simulator.clock.ClockParam;
 import org.atar.simulator.clock.SimulationClock;
+import org.atar.simulator.entities.animal.Animal;
+import org.atar.simulator.entities.animal.AnimalType;
 import org.atar.simulator.map.MapFile;
 import org.atar.simulator.map.MapScale;
+import org.atar.simulator.models.Point;
 import org.atar.utils.Pair;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Simulation implements Runnable {
 
     // konkretny powód dla którego zrobiono z tego statyczne pole to to,
     // że dużo publisherów wymaga wiedzy na temat tego, czy symulacja leci
     private static boolean isRunning;
+    private static ArrayList<Animal> animals = new ArrayList<Animal>();
+
 
     public Simulation() {
 
@@ -24,6 +30,7 @@ public class Simulation implements Runnable {
 
         Simulation.isRunning = true;
         SimulationClock.init();
+        animals.add(new Animal(new Point(46, 8, map), AnimalType.BEAR, 0.01f, new Pair<>(0,0), new Pair<>(720,480)));
     }
 
 
@@ -34,21 +41,7 @@ public class Simulation implements Runnable {
 
         while(Simulation.isRunning) {
 
-            /*
-            * SCHEMAT DZIALANIA SYMULATORA
-            *
-            * Krok 1a: Opracowanie turystów i wstępna konfiguracja
-            *       - położenie
-            *       - czas podejmowania decyzji
-            *       - czas do podjęcia decyzji
-            *       - kierunek
-            * Krok 1b: Opracowanie zwierząt
-            *       - zwierzę musi się tylko poruszać po mapie i nie oddziałuje w innym stopniu na inne obiekty
-            *       - położenie, kierunek, prędkość itp
-            * Krok 2: ???
-            * Krok 3: następny cykl zegara
-            * */
-            generateSampleAnimals();
+            //generateSampleAnimals();
             prepareNextCycle();
         }
     }
@@ -74,4 +67,6 @@ public class Simulation implements Runnable {
     public static boolean isRunning() {
         return isRunning;
     }
+
+
 }

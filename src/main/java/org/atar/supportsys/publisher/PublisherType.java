@@ -1,4 +1,4 @@
-package org.atar.supportsys.broker;
+package org.atar.supportsys.publisher;
 
 public enum PublisherType {
     ANIMAL,
